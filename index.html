@@ -36,28 +36,16 @@
   <div class='content-column'>
     <h1>hw-03: Practicing D3</h1>
 
-    <p>
-      <div id="my_dataviz"></div>
-    </p>
 
-    <h2>Simple formatting instructions</h2>
 
-    <p>
-      Use <code>&lt;p&gt;&lt;/p&gt;</code> tags to enclose a paragraph in html. <br>
-      Use <code>&lt;h2&gt;&lt;/h2&gt;</code> to enclose a heading. <br>
-      Use <code>&lt;br&gt;</code> to force a line break.
-    </p>
 
-    <p>
-      There are two premade <code>div</code> in this document that will hold your visualizations. The first one has id <code>vis1</code>, the second one has <code>vis2</code>. Write your explanation and analysis close to each of your visualizations.
-    </p>
+
+
 
     <p>
       Your first visualization goes here:
       
       <!-- <script>
-
-
         // set the dimensions and margins of the graph
         var margin = {top: 30, right: 30, bottom: 70, left: 60},
             width = 460 - margin.left - margin.right,
@@ -110,7 +98,6 @@
         </script> -->
 
 <!-- <script>
-
   // set the dimensions and margins of the graph
   const margin = {top: 10, right: 30, bottom: 20, left: 50},
       width = 460 - margin.left - margin.right,
@@ -187,6 +174,7 @@
     </p>
 
     <!-- Visualization goes here -->
+    <div id="my_dataviz"></div>
 
     <script>
 
@@ -254,13 +242,28 @@
     <!-- Visualization goes here -->
     <div class='vis-holder' id='vis2'></div>
 
-    <h2>Acknowledgments</h2>
+    <h2>Acknowledgments and Resources</h2>
 
     <p>
       <em>List here where any code, packages/libraries, text, images, designs, etc. that you leverage come from.</em>
     </p>
 
     <ul>
+
+        <li><a href='https://www.kaggle.com/shelvigarg/wine-quality-dataset'>
+          Wine Data Set</a>
+          used to make the scatter plot. This data is from Kaggle
+        </li>
+  
+        <li><a href='https://www.d3-graph-gallery.com/graph/scatter_basic.html'>
+          D3 scatter plot</a>
+          We looked at this documentation to learn how to develop a scatterplot in d3. 
+        </li>
+  
+        <li><a href='https://www.d3-graph-gallery.com/graph/barplot_grouped_basicWide.html'>
+          D3 Grouped Bar Chart</a>
+          We looked at this documentation to learn how to develop a grouped bar chart in d3. 
+        </li>
       <li><a href='https://d3js.org/'>
         D3: Data-Driven Documents</a>
         by Mike Bostock is used for manipulating the DOM to create visualizations.
