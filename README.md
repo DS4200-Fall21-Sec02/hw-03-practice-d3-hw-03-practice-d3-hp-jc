@@ -3,7 +3,6 @@
 This repository is your starting point for Task 3 in hw-03. Assignment details and instructions are below. 
 
 Link to your GitHub pages website: https://ds4200-fall21-sec02.github.io/hw-03-practice-d3-hw-03-practice-d3-hp-jc/
-**Github pages doesn't work for some reason**
 
 # Aim of the assignment
 
