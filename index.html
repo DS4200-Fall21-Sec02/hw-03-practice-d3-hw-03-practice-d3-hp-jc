@@ -218,9 +218,56 @@
               .attr("cy", function (d) { return y(d.density); } )
               .attr("r", 1.5)
               .style("fill", "#69b3a2")
-      
+              .on("mouseover", mouseover)
+              .on("mousemove", mousemove)
+              .on("mouseleave", mouseleave);
+
+             
+              // Color scale: give me a specie name, I return a color
+  var color = d3.scaleOrdinal()
+    .domain(["quality", "density"])
+    .range(["#ff8080", "#ffffff"])
+
       })
+
+  // create a tooltip
+  var Tooltip = d3.select("#my_dataviz")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    Tooltip
+      .style("opacity", 1)
+    d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+  }
+  var mousemove = function(d) {
+    Tooltip
+      .html("The exact value of<br>this cell is: " + d.value)
+      .style("left", (d3.mouse(this)[0]+70) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
+  }
+  var mouseleave = function(d) {
+    Tooltip
+      .style("opacity", 0)
+    d3.select(this)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+  }
+
+
+
       </script>
+
+
       
       <a href="https://www.kaggle.com/shelvigarg/wine-quality-dataset">Click here for the wine dataset.</a> 
       We chose to compare wine alcohol level to density. 
@@ -250,6 +297,11 @@
 
     <ul>
 
+      <li><a href='https://www.d3-graph-gallery.com/graph/interactivity_tooltip.html#template'>
+        Tool tips</a>
+        We used this to make our vis interactive. 
+      </li>
+
         <li><a href='https://www.kaggle.com/shelvigarg/wine-quality-dataset'>
           Wine Data Set</a>
           used to make the scatter plot. This data is from Kaggle
@@ -276,6 +328,7 @@
         Assignment--D3_Basic_Charts</a>
         by Cody Dunne is used to create this assignment.
       </li>
+
     </ul>
   </div>
 
