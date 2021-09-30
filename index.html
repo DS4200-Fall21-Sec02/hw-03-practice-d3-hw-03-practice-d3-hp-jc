@@ -4,6 +4,10 @@
 <!-- Metadata -->
 <head>
   <meta charset='utf-8'>
+  <script src="https://d3js.org/d3.v6.js"></script>
+
+  <script src="js/main.js"></script>
+  
 
   <!-- Title -->
   <title>hw-03: Practicing D3</title>
@@ -33,7 +37,7 @@
     <h1>hw-03: Practicing D3</h1>
 
     <p>
-      Replace this text. Use this space to describe your visualizations.
+      <div id="my_dataviz"></div>
     </p>
 
     <h2>Simple formatting instructions</h2>
@@ -50,13 +54,201 @@
 
     <p>
       Your first visualization goes here:
+      
+      <!-- <script>
+
+
+        // set the dimensions and margins of the graph
+        var margin = {top: 30, right: 30, bottom: 70, left: 60},
+            width = 460 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+        
+        // append the svg object to the body of the page
+        var svg = d3.select("#my_dataviz")
+          .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+        
+        // Parse the Data
+        d3.csv("data/math2.csv", function(data) {
+        
+        // X axis
+        var x = d3.scaleBand()
+          .range([ 0, width ])
+          .domain(data.map(function(d) { return d.Grade; }))
+          .padding(0.2);
+        svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
+        
+        // Add Y axis
+        var y = d3.scaleLinear()
+          .domain([650, 750])
+          .range([ height, 0]);
+        svg.append("g")
+          .call(d3.axisLeft(y));
+        
+        // Bars
+        svg.selectAll("mybar")
+          .data(data)
+          .enter()
+          .append("rect")
+            .attr("x", function(d) { return x(d.Grade); })
+            .attr("y", function(d) { return y(d.Mean_Scale_Score); })
+            .attr("width", x.bandwidth())
+            .attr("height", function(d) { return height - y(d.Mean_Scale_Score); })
+            .attr("fill", "#69b3a2")
+        
+        })
+        
+        </script> -->
+
+<!-- <script>
+
+  // set the dimensions and margins of the graph
+  const margin = {top: 10, right: 30, bottom: 20, left: 50},
+      width = 460 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+  
+  // append the svg object to the body of the page
+  const svg = d3.select("#my_dataviz")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",`translate(${margin.left},${margin.top})`);
+  
+  // Parse the Data
+  d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv").then( function(data) {
+  
+    // List of subgroups = header of the csv files = soil condition here
+    const subgroups = data.columns.slice(1)
+  
+    // List of groups = species here = value of the first column called group -> I show them on the X axis
+    const groups = data.map(d => d.group)
+  
+    console.log(groups)
+  
+    // Add X axis
+    const x = d3.scaleBand()
+        .domain(groups)
+        .range([0, width])
+        .padding([0.2])
+    svg.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x).tickSize(0));
+  
+    // Add Y axis
+    const y = d3.scaleLinear()
+      .domain([0, 40])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+  
+    // Another scale for subgroup position?
+    const xSubgroup = d3.scaleBand()
+      .domain(subgroups)
+      .range([0, x.bandwidth()])
+      .padding([0.05])
+  
+    // color palette = one color per subgroup
+    const color = d3.scaleOrdinal()
+      .domain(subgroups)
+      .range(['#e41a1c','#377eb8','#4daf4a'])
+  
+    // Show the bars
+    svg.append("g")
+      .selectAll("g")
+      // Enter in data = loop group per group
+      .data(data)
+      .join("g")
+        .attr("transform", d => `translate(${x(d.group)}, 0)`)
+      .selectAll("rect")
+      .data(function(d) { return subgroups.map(function(key) { return {key: key, value: d[key]}; }); })
+      .join("rect")
+        .attr("x", d => xSubgroup(d.key))
+        .attr("y", d => y(d.value))
+        .attr("width", xSubgroup.bandwidth())
+        .attr("height", d => height - y(d.value))
+        .attr("fill", d => color(d.key));
+  
+  })
+  
+  </script> -->
+
+
+      
     </p>
 
     <!-- Visualization goes here -->
+
+    <script>
+
+      // set the dimensions and margins of the graph
+      const margin = {top: 10, right: 30, bottom: 30, left: 60},
+              width = 460 - margin.left - margin.right,
+              height = 400 - margin.top - margin.bottom;
+          
+      // append the svg object to the body of the page
+      const svg = d3.select("#my_dataviz")
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform", `translate(${margin.left}, ${margin.top})`);
+      
+      //Read the data
+      d3.csv("data/wine2.csv").then( function(data) {
+      
+          // Add X axis
+          const x = d3.scaleLinear()
+          .domain([7, 16])
+          .range([ 0, width ]);
+          svg.append("g")
+          .attr("transform", `translate(0, ${height})`)
+          .call(d3.axisBottom(x));
+      
+          // Add Y axis
+          const y = d3.scaleLinear()
+          .domain([0.97, 1.04])
+          .range([ height, 0]);
+          svg.append("g")
+          .call(d3.axisLeft(y));
+      
+          // Add dots
+          svg.append('g')
+          .selectAll("dot")
+          .data(data)
+          .join("circle")
+              .attr("cx", function (d) { return x(d.alcohol); } )
+              .attr("cy", function (d) { return y(d.density); } )
+              .attr("r", 1.5)
+              .style("fill", "#69b3a2")
+      
+      })
+      </script>
+      
+      <a href="https://www.kaggle.com/shelvigarg/wine-quality-dataset">Click here for the wine dataset.</a> 
+      We chose to compare wine alcohol level to density. 
+      We decided to see if their is a linear relationship between the two. 
+      After creating this visualization, we learned that density in wine slightly decreases
+      as you increase the alcohol level in wine. 
+
+
     <div class='vis-holder' id='vis1'></div>
+
+
 
 	  <p>
       Your second visualization goes here:
+
+
     </p>
 
     <!-- Visualization goes here -->
